@@ -25,3 +25,30 @@ TEST(HelloTest,ClassMeanerCheck) {
     EXPECT_FLOAT_EQ(m.meanOfFloats(),4.0);
 
 }
+
+class MeanerTestClass : public ::testing::Test {
+
+protected: //make protected so that they can be used within test classes
+  //var to use
+  std::vector<float> floats2;
+  Meaner m2;
+
+  MeanerTestClass(){ }
+
+  void SetUp() override{
+    floats2.push_back(2.0);
+    floats2.push_back(2.0);
+    floats2.push_back(3.0);
+    floats2.push_back(8.0);
+    floats2.push_back(5.0);
+    m2.addNumbers(floats2);
+   }
+  void TearDown(){ }
+
+  ~MeanerTestClass() {}
+
+};
+
+TEST_F(MeanerTestClass,DefaultConstructor){
+  EXPECT_FLOAT_EQ(m2.meanOfFloats(),4.0);
+}
